@@ -1,3 +1,5 @@
+include { FETCH_SRA } from './modules/fetch_sra'
+
 params.samplesheet = "${projectDir}/assets/samplesheet.csv"
 
 workflow {
@@ -9,5 +11,6 @@ workflow {
             tuple(meta, row.run_accession) 
         }
         
-    samples_ch.view()
+    FETCH_SRA(samples_ch)
+    FETCH_SRA.out.view()
 }
