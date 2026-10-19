@@ -1,5 +1,6 @@
 process FETCH_SRA {
     tag "${meta.id}"
+    label 'download'
     container 'quay.io/biocontainers/sra-tools:3.1.1--h4304569_2'
 
     input:
