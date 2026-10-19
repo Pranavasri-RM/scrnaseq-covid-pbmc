@@ -12,7 +12,9 @@ process FETCH_SRA {
     """ 
     prefetch ${run_id}
     fasterq-dump --split-files --threads ${task.cpus} ${run_id}
-    gzip ${run_id}_1.fastq ${run_id}_2.fastq
+    gzip ${run_id}_1.fastq &
+    gzip ${run_id}_2.fastq &
+    wait
     rm -r ${run_id}
     """
 }
