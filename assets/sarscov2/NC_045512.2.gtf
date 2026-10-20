@@ -1,0 +1,3 @@
+NC_045512.2	NCBI	gene	1	29903	.	+	.	gene_id "SARS-CoV-2"; gene_name "SARS-CoV-2";
+NC_045512.2	NCBI	transcript	1	29903	.	+	.	gene_id "SARS-CoV-2"; transcript_id "SARS-CoV-2_tx"; gene_name "SARS-CoV-2";
+NC_045512.2	NCBI	exon	1	29903	.	+	.	gene_id "SARS-CoV-2"; transcript_id "SARS-CoV-2_tx"; gene_name "SARS-CoV-2";
