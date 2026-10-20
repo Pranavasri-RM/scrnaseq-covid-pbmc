@@ -1,6 +1,5 @@
 include { FETCH_SRA } from './modules/fetch_sra'
-
-params.samplesheet = "${projectDir}/assets/samplesheet.csv"
+include { KB_REF    } from './modules/kb_ref'
 
 workflow {
     samples_ch = channel
@@ -8,9 +7,17 @@ workflow {
         .splitCsv(header: true)
         .map { row ->
             def meta = [id: row.sample, donor: row.donor, condition: row.condition]
-            tuple(meta, row.run_accession) 
+            tuple(meta, row.run_accession)
         }
-        
+
     FETCH_SRA(samples_ch)
-    FETCH_SRA.out.view()
+
+    KB_REF(
+        file(params.genome_fasta),
+        file(params.genome_gtf),
+        file(params.virus_fasta),
+        file(params.virus_gtf)
+    )
+
+    KB_REF.out.index.view()
 }
