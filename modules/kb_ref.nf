@@ -1,5 +1,5 @@
 process KB_REF {
-    container 'quay.io/biocontainers/kb-python:0.30.2--pyh106432d_0'
+    container 'ghcr.io/pranavasri-rm/kb-python:0.30.2'
 
     input:
     path genome_fasta
