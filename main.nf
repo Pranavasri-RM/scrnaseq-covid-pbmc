@@ -1,5 +1,6 @@
 include { FETCH_SRA } from './modules/fetch_sra'
 include { KB_REF    } from './modules/kb_ref'
+include { KB_COUNT  } from './modules/kb_count'
 
 workflow {
     samples_ch = channel
@@ -19,5 +20,6 @@ workflow {
         file(params.virus_gtf)
     )
 
-    KB_REF.out.index.view()
+    KB_COUNT(FETCH_SRA.out, KB_REF.out.index, KB_REF.out.t2g)
+    KB_COUNT.out.counts.view()
 }
