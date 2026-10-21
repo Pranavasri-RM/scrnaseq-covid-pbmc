@@ -10,6 +10,7 @@ process KB_COUNT {
 
     output:
     tuple val(meta), path("${meta.id}"), emit: counts
+    tuple val(meta), path("${meta.id}/counts_unfiltered/adata.h5ad"), emit: h5ad
 
     script:
     """
@@ -19,8 +20,9 @@ process KB_COUNT {
         -x 0,0,12:0,12,20:1,0,0 \\
         -o ${meta.id} \\
         -t ${task.cpus} \\
-        -m ${task.memory.toGiga()}G \\
+        -m ${Math.round(task.memory.toGiga() * 0.6)}G \\
         --h5ad \\
+        --delete-bus \\
         ${read1} ${read2}
     """
 }
