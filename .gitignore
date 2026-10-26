@@ -22,7 +22,9 @@ data/
 __pycache__/
 .ipynb_checkpoints/
 
-# macOS
-.DS_Store
+# Reference papers (copyrighted; cited in the README instead)
+papers/
+
+# Editor and OS files
 .vscode/
-*.pdf
+.DS_Store
