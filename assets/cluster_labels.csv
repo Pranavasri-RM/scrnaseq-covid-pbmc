@@ -1,0 +1,16 @@
+cluster,cell_type
+0,CD14 monocyte
+1,CD16 monocyte
+2,Platelet
+3,Dendritic cell
+4,pDC
+5,NK / CD8 T
+6,B cell
+7,CD4 T
+8,Red blood cell
+9,Proliferating
+10,Plasmablast
+11,REMOVE
+12,Neutrophil
+13,Progenitor
+14,Developing neutrophil
