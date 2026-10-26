@@ -82,8 +82,14 @@ def is_ambient_ig(genes):
     return genes.str.match(r"^IG[HKL][VDJCAGEM]") | (genes == "JCHAIN")
 
 
+def load_gene_sets(gene_sets):
+    """A .gmt path is read into a dict (the same form gseapy uses for a downloaded library); a name is passed through."""
+    return gp.read_gmt(gene_sets) if os.path.exists(gene_sets) else gene_sets
+
+
 def enrichment(de_results, gene_sets):
     """Hallmark over-representation for up and down genes, background = genes tested."""
+    gene_sets = load_gene_sets(gene_sets)
     rows = []
     for ct, r in de_results.items():
         r = r[~is_ambient_ig(r["gene"].astype(str))]
@@ -94,7 +100,14 @@ def enrichment(de_results, gene_sets):
                 continue
             enr = gp.enrichr(gene_list=genes["gene"].astype(str).tolist(), gene_sets=gene_sets,
                              background=background, outdir=None)
-            for _, t in enr.results.query("`Adjusted P-value` < 0.05").head(3).iterrows():
+            res = enr.results
+            if not isinstance(res, pd.DataFrame) or res.empty:   # gseapy returns a list when nothing overlaps
+                print(f"{ct} {direction}: no pathway overlaps")
+                continue
+            top = (res.query("`Adjusted P-value` < 0.05")
+                      .sort_values(["Adjusted P-value", "Term"])
+                      .head(3))
+            for _, t in top.iterrows():
                 hit = t["Genes"].split(";")
                 rows.append({"cell_type": ct, "direction": direction, "pathway": t["Term"],
                              "n_genes": len(hit), "odds_ratio": round(t["Odds Ratio"], 1),
