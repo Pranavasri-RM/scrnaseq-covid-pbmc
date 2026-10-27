@@ -3,6 +3,9 @@ include { KB_REF    } from './modules/kb_ref'
 include { KB_COUNT  } from './modules/kb_count'
 include { QC_SAMPLE } from './modules/qc_sample'
 include { QC_MERGE  } from './modules/qc_merge'
+include { CLUSTER   } from './modules/cluster'
+include { ANNOTATE  } from './modules/annotate'
+include { COMPOSITION_DE } from './modules/composition_de'
 
 workflow {
     samples_ch = channel
@@ -30,4 +33,10 @@ workflow {
         QC_SAMPLE.out.h5ad.map { meta, h5ad -> h5ad }.collect(),
         file(params.samplesheet)
     )
+
+    CLUSTER(QC_MERGE.out.h5ad)
+
+    ANNOTATE(CLUSTER.out.h5ad, file(params.cluster_labels), params.celltypist_model)
+
+    COMPOSITION_DE(ANNOTATE.out.h5ad, params.gene_sets)
 }
