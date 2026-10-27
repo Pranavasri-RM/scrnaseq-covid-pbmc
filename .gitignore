@@ -21,6 +21,7 @@ data/
 # Python / Jupyter
 __pycache__/
 .ipynb_checkpoints/
+.pytest_cache/
 
 # Reference papers (copyrighted; cited in the README instead)
 papers/
