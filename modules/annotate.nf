@@ -13,6 +13,9 @@ process ANNOTATE {
 
     script:
     """
+    # CellTypist creates a folder at import time; the task folder is writable, the home directory isn't
+    export CELLTYPIST_FOLDER=\$PWD/celltypist
+
     annotate.py --input ${h5ad} --labels ${labels} --model ${model} \\
         --out annotated.h5ad --counts-out cell_counts_per_sample.csv
     """
