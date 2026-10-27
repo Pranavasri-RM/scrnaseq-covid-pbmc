@@ -1,6 +1,8 @@
 include { FETCH_SRA } from './modules/fetch_sra'
 include { KB_REF    } from './modules/kb_ref'
 include { KB_COUNT  } from './modules/kb_count'
+include { QC_SAMPLE } from './modules/qc_sample'
+include { QC_MERGE  } from './modules/qc_merge'
 
 workflow {
     samples_ch = channel
@@ -21,5 +23,11 @@ workflow {
     )
 
     KB_COUNT(FETCH_SRA.out, KB_REF.out.index, KB_REF.out.t2g)
-    KB_COUNT.out.counts.view()
+    
+    QC_SAMPLE(KB_COUNT.out.counts, file(params.qc_cutoffs))
+
+    QC_MERGE(
+        QC_SAMPLE.out.h5ad.map { meta, h5ad -> h5ad }.collect(),
+        file(params.samplesheet)
+    )
 }
