@@ -7,18 +7,18 @@ on:
 
 jobs:
   unit-tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     container: ghcr.io/pranavasri-rm/scrna-analysis:1.0   # the same image the pipeline uses
     steps:
       - name: Check out the repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Install pytest
         run: pip install pytest==9.1.1
 
       - name: Run unit tests
         run: pytest -v tests/
-        
+
   pipeline-stub:
     runs-on: ubuntu-24.04
     steps:
@@ -26,7 +26,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Set up Java (Nextflow needs it)
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "17"
