@@ -1,16 +1,16 @@
-cluster,cell_type
-0,CD14 monocyte
-1,CD16 monocyte
-2,Platelet
-3,Dendritic cell
-4,pDC
-5,NK / CD8 T
-6,B cell
-7,CD4 T
-8,Red blood cell
-9,Proliferating
-10,Plasmablast
-11,REMOVE
-12,Neutrophil
-13,Progenitor
-14,Developing neutrophil
+cluster,cell_type,marker
+0,CD14 monocyte,CD14
+1,CD16 monocyte,FCGR3A
+2,NK / CD8 T,NKG7
+3,CD4 T,IL7R
+4,Proliferating,MKI67
+5,REMOVE,
+6,Dendritic cell,FCER1A
+7,B cell,MS4A1
+8,Red blood cell,HBB
+9,Platelet,PPBP
+10,Plasmablast,JCHAIN
+11,Progenitor,CD34
+12,Neutrophil,FCGR3B
+13,Developing neutrophil,CEACAM8
+14,pDC,LILRA4
