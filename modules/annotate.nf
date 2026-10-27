@@ -19,4 +19,9 @@ process ANNOTATE {
     annotate.py --input ${h5ad} --labels ${labels} --model ${model} \\
         --out annotated.h5ad --counts-out cell_counts_per_sample.csv
     """
+
+    stub:
+    """
+    touch annotated.h5ad cell_counts_per_sample.csv
+    """
 }

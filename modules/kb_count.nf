@@ -25,4 +25,11 @@ process KB_COUNT {
         --delete-bus \\
         ${read1} ${read2}
     """
+
+    
+    stub:
+    """
+    mkdir -p ${meta.id}/counts_unfiltered
+    touch ${meta.id}/counts_unfiltered/adata.h5ad
+    """
 }

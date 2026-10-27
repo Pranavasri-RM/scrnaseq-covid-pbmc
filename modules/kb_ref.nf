@@ -21,4 +21,9 @@ process KB_REF {
         ${genome_fasta},${virus_fasta} \\
         ${genome_gtf},${virus_gtf}
     """
+
+    stub:
+    """
+    touch index.idx t2g.txt
+    """
 }

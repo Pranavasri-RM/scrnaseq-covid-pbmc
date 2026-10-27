@@ -13,4 +13,9 @@ process QC_MERGE {
     """
     qc_merge.py --inputs ${h5ads} --samplesheet ${samplesheet} --out combined_qc.h5ad
     """
+
+    stub:
+    """
+    touch combined_qc.h5ad
+    """
 }

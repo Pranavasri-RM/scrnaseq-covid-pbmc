@@ -18,3 +18,23 @@ jobs:
 
       - name: Run unit tests
         run: pytest -v tests/
+        
+  pipeline-stub:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v5
+
+      - name: Set up Java (Nextflow needs it)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Install Nextflow
+        uses: nf-core/setup-nextflow@v2
+        with:
+          version: "25.10.3"
+
+      - name: Stub run of the whole pipeline
+        run: nextflow run main.nf -stub -profile test

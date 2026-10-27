@@ -19,4 +19,9 @@ process QC_SAMPLE {
         --cutoffs ${cutoffs} \\
         --out ${meta.id}.h5ad
     """
+
+    stub:
+    """
+    touch ${meta.id}.h5ad
+    """
 }

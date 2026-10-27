@@ -18,4 +18,9 @@ process FETCH_SRA {
     wait
     rm -r ${run_id}
     """
+
+    stub:
+    """
+    touch ${run_id}_1.fastq.gz ${run_id}_2.fastq.gz
+    """
 }

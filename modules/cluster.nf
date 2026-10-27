@@ -12,4 +12,9 @@ process CLUSTER {
     """
     cluster.py --input ${h5ad} --out clustered.h5ad
     """
+
+    stub:
+    """
+    touch clustered.h5ad
+    """
 }

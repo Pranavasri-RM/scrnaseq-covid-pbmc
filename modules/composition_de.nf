@@ -13,4 +13,10 @@ process COMPOSITION_DE {
     """
     composition_de.py --input ${h5ad} --outdir de --gene-sets ${gene_sets}
     """
+
+    stub:
+    """
+    mkdir -p de
+    touch de/de_summary.csv
+    """
 }
